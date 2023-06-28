@@ -1,5 +1,5 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
+.env
 # dependencies
 /node_modules
 /.pnp
@@ -18,6 +18,9 @@
 # misc
 .DS_Store
 *.pem
+
+//supabase
+
 
 # debug
 npm-debug.log*
