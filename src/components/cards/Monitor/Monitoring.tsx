@@ -3,19 +3,19 @@ import MonitorCard from './MonitorCard';
 
 interface Props {
     monitors:{
+        account:string;
         username:string;
-        name:string;
-        since:string;
+        description:string;
+        created_at:string;
     }[]
 
 }
 
 const Monitoring: React.FC<Props> = ({monitors}) => {
-    console.log(monitors);
     return (
         <div className='flex flex-wrap flex-row  gap-12 m-8 justify-center '>
             {monitors.map((item, index) => (
-                    <MonitorCard key={index} monitoringDate={item.since} name={item.name} username={item.username}/>
+                    <MonitorCard key={index} monitoringDate={item.created_at} name={item.account} username={item.username}/>
                 ))}
         </div>
     )

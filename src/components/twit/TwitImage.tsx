@@ -9,7 +9,6 @@ interface Props {
 }
 
 const TwitImage: React.FC<Props> = () => {
-
     return (
         <div>
                 <Image
