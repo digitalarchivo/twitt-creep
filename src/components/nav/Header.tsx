@@ -1,4 +1,5 @@
 import React from 'react'
+import ManualTrack from '../Modals/ManualTrack'
 
 interface Props {
 
@@ -14,7 +15,7 @@ const Header: React.FC<Props> = () => {
                     <a className='bg-purple-900 text-amber-400 rounded-3xl hover:scale-125 p-5' href='/history'>History</a>
                     <div className='bg-purple-900 text-amber-400 rounded-3xl hover:scale-125 p-5'>Notifications</div>
                     <div className='bg-purple-900 text-amber-400 rounded-3xl hover:scale-125 p-5'>Send DM</div>
-                    <div className='bg-purple-900 text-amber-400 rounded-3xl hover:scale-125 p-5'>Manual Tracking</div>
+                    <ManualTrack/>
                 </div>
     
                 <div className='text-lg lg:text-3xl text-white'>Twitter CREEP Follows</div>

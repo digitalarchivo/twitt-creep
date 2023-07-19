@@ -10,13 +10,14 @@ interface Props {
     
 }
 
+export const revalidate = 0
 export default async function page({}: Props) {
-    
     const monitored = await getTracking();
     const signIn = await getLastLogIn();
     const acct = await getAllFollowingsSince(signIn.last_logged_in);
     const lastUpdated = new Date(signIn.last_updated).toDateString();
 
+    console.log('monitored', monitored)
     return (
         <div className='m-2 relative'>
          <TwitImage />

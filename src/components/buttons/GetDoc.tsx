@@ -6,15 +6,9 @@ interface Props {
 }
 
 const GetDoc: React.FC<Props> = () => {
-    const [usernames, setUsernames] = React.useState<string[]>([]);
-    let usernames1 = localStorage.getItem('usernames') ? JSON.parse(localStorage.getItem('usernames')!) : [];
-    // React.useEffect(() => {
-    //     setUsernames(prev=>usernames1);
-    // })
     const handleAddAll = () => {
-    
-    }
 
+    }
     // @ts-ignore
     const [accounts, setAccounts] = useState(JSON.parse(localStorage.getItem('usernames')) || []);
 
