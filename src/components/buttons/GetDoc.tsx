@@ -9,13 +9,14 @@ const GetDoc: React.FC<Props> = () => {
     const handleAddAll = () => {
 
     }
-    // @ts-ignore
-    const [accounts, setAccounts] = useState(JSON.parse(localStorage.getItem('usernames')) || []);
+    const accounts1 = JSON.parse(localStorage.getItem('usernames') || '[]');
+    const [accounts, setAccounts] = useState<string[]|[]>(accounts1);
 
 useEffect(() => {
   const handleStorageChange = () => {
-    // @ts-ignore
-    setAccounts(JSON.parse(localStorage.getItem('usernames')));
+
+    const accounts1 = JSON.parse(localStorage.getItem('usernames') || '[]');
+    setAccounts(accounts1);
   };
 
   window.addEventListener('storage', handleStorageChange);

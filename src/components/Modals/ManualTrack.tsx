@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Modal from 'react-modal';
 import { useForm } from 'react-hook-form';
 import { addTracking } from '../utils/supabase';
+import { useRouter } from 'next/navigation';
 
 interface Props {
 }
@@ -47,18 +48,24 @@ const ManualTrack: React.FC<Props> = () => {
         setIsOpen(false);
 
     }
-    const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
+    const { register, handleSubmit, formState: { errors },reset } = useForm<FormData>();
 
+    const router = useRouter();
     const onSubmit = (data: FormData) => {
         console.log(data);
         setIsLoading(prev => true);
         addTracking(data.account, data.username, data.description).then((res) => {
-            setInterval(() => {
-                setIsLoading(prev => false);
-                setIsOpen(prev => false);
-                console.log(res);
-            }, 8000);
+            console.log(res);
         })
+        setTimeout(() => {
+            console.log('Addition successful.');
+            setIsLoading(prev => false);
+            setIsOpen(prev => false);
+            data.account = '';
+            data.username = '';
+            data.description = '';
+            window.location.reload()
+        }, 5000);
     }
     return (
         <div>
@@ -76,8 +83,37 @@ const ManualTrack: React.FC<Props> = () => {
                         {isLoading ? (
                             <div className='animate-pulse'>
                                 <p className='text-xl'>Adding Monitored Account from DB</p>
-                                <button className='bg-purple-600 p-3 rounded-2xl mx-8 mt-6 hover:scale-125 text-gray-500'>------------------</button>
-                                <button className='bg-red-600 p-3 rounded-2xl mx-8 mt-6 hover:scale-125 text-gray-500'>----------------------------------------------------------</button>
+                                <div className="space-y-6">
+                                    {/* Account Field */}
+                                    <div>
+                                        <label className="block text-sm font-medium text-sky-700">
+                                            --------
+                                        </label>
+                                        <input {...register('account', { required: true })} type="text" required className="mt-1 focus:ring-slate-500 focus:border-slate-500 block w-full sm:text-sm border-gray-700 rounded-md h-12 text-center" />
+                                        {errors.account && <p className='text-red-500 animate-pulse'>This field is required.</p>}
+                                    </div>
+
+                                    {/* Username Field */}
+                                    <div>
+                                        <label className="block text-sm font-medium text-sky-700">
+                                            -------
+                                        </label>
+                                        <input type="text" className="mt-1 focus:ring-slate-800 focus:border-slate-800 block w-full sm:text-sm border-gray-300 rounded-md text-center h-12" />
+                                        {errors.username && <p className='text-red-500 animate-pulse'>This field is optional.</p>}
+                                    </div>
+
+                                    {/* Description Field */}
+                                    <div>
+                                        <label className="block text-sm font-medium text-sky-700">
+                                            ---------
+                                        </label>
+                                        <textarea  className="mt-1 focus:ring-slate-800 focus:border-slate-800 block w-full sm:text-sm border-gray-300 rounded-md h-20 p-2"></textarea>
+                                    </div>
+                                    <div>
+                                        <button className='bg-purple-600 p-3 rounded-2xl mx-8 mt-6 hover:scale-125 text-white'>--------</button>
+                                        <button type="submit" className='bg-blue-600 hover:bg-blue-900 border border-transparent  shadow-sm p-3 rounded-2xl mx-8 mt-6 hover:scale-125 text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>-------</button>
+                                    </div>
+                                </div>
                             </div>
                         ) : (
                             <>
@@ -97,7 +133,7 @@ const ManualTrack: React.FC<Props> = () => {
                                         <label className="block text-sm font-medium text-sky-700">
                                             Username
                                         </label>
-                                        <input {...register('username', { required: true })} type="text"  className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md text-center h-12" />
+                                        <input {...register('username', { required: true })} type="text" className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md text-center h-12" />
                                         {errors.username && <p className='text-red-500 animate-pulse'>This field is optional.</p>}
                                     </div>
 
@@ -106,7 +142,7 @@ const ManualTrack: React.FC<Props> = () => {
                                         <label className="block text-sm font-medium text-sky-700">
                                             Description
                                         </label>
-                                        <textarea {...register('description')} required className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md h-20 p-2"></textarea>
+                                        <textarea {...register('description')} className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md h-20 p-2"></textarea>
                                     </div>
                                     <div>
                                         <button onClick={closeModal} className='bg-purple-600 p-3 rounded-2xl mx-8 mt-6 hover:scale-125 text-white'>I&#39;m a pussy Bitch</button>

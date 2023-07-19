@@ -49,13 +49,12 @@ const DeleteModal: React.FC<Props> = ({ account,refetch }) => {
         setIsLoading(true);  // Set loading to true at the beginning
         try {
             await deleteTracking(account);
-            console.log('Deletion successful.');
             // Then update UI accordingly here
-            setInterval(() => {
+            setTimeout(() => {
+                setIsLoading(false);
+                refetch();
+                setIsOpen(false);
             }, 5000);
-            refetch();
-            setIsLoading(false);
-            setIsOpen(false);
         } catch(error) {
             // Handle any errors here
             console.log(error);
