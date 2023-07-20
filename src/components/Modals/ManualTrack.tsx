@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import Modal from 'react-modal';
 import { useForm } from 'react-hook-form';
 import { addTracking } from '../utils/supabase';

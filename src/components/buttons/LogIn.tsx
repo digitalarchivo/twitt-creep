@@ -14,8 +14,8 @@ const LogIn: React.FC<Props> = ({logIn}) => {
         //direct to appliaction
         await signIn(logIn);
         setTimeout(() => {
-            setLoading(false);
             window.location.href = '/application';
+            setLoading(false);
         }, 5000);
     }
 

@@ -1,6 +1,6 @@
 'use client';
 import { deleteTracking } from '@/components/utils/supabase';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import Modal from 'react-modal';
 
 interface Props {

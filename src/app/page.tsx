@@ -9,10 +9,6 @@ interface Props {
 export default async function page({}: Props) {
     
     const signIn = await getLastLogIn();
-      // @ts-ignore
-    console.log(signIn[0]);
-    // @ts-ignore
-    console.log('last logged  in', new Date(signIn[0].last_logged_in))
 
     return (
         <div className='flex  h-screen justify-center items-center '>

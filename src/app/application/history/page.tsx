@@ -17,11 +17,9 @@ const page: React.FC<Props> = () => {
         // @ts-ignore
         getAllFollowingsSinceFull(event.target.value).then((res) => {
             setAcct(() => res)
-            console.log(acct)
         });
 
     }
-    console.log(selectedDate)
     return (
         <div className='text-center m-24'>
             <div className='text-5xl text-white '>Pick Your Dates</div>

@@ -1,7 +1,6 @@
 'use client'
-import React,{useState,useEffect,use} from 'react'
+import React,{useState,useEffect} from 'react'
 import MonitorCard from './MonitorCard';
-import { supabase } from '../../../../supabse';
 import { useRouter } from 'next/navigation';
 import { getTracking } from '@/components/utils/supabase';
 
