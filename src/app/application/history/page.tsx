@@ -8,7 +8,7 @@ interface Props {
 
 }
 
-const page: React.FC<Props> = () => {
+const Page: React.FC<Props> = () => {
     const [selectedDate, setSelectedDate] = useState('');
     const [acct, setAcct] = useState<any[]>([]);
     // @ts-ignore
@@ -43,4 +43,4 @@ const page: React.FC<Props> = () => {
     )
 }
 
-export default page
+export default Page
