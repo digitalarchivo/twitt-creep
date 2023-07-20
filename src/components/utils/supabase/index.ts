@@ -16,33 +16,38 @@ export const getAllFollowingsSince = cache(async (since: string) => {
     const { data, error } = await supabase
         .from("Followed")
         .select("*")
-        .gte("created_at", since)
+        .gte('created_at', since);
     if (error) {
         throw error;
     }
     return data;
     });
+    export const getAllFollowingsSinceFull = async (since: string) => {
+        const { data, error } = await supabase
+            .from("Followed")
+            .select("*")
+            .gte('created_at', since);
+        if (error) {
+            throw error;
+        }
+        return data;
+        };
 
-export const getLastLogIn = cache(async () => {
-    const { data: Lastsignin, error } = await supabase
+export const getLastLogIn = async () => {
+    const {data} = await supabase
         .from('sign')
-        .select('*')
-        .maybeSingle();
-    if (error) {
-        throw error;
-    }
+        .select("*")
+        .eq('id', 0)
  
-    return Lastsignin;
-    });
+    return data;
+    };
 
 export const deleteTracking = async (id: string) => {
-    const { data,error } = await supabase
+    const data= await supabase
         .from("Tracking")
         .delete()
         .match({ account: id })
-    if (error) {
-        return error;
-    }
+ 
     return data;
     }
 
@@ -57,3 +62,16 @@ export const deleteTracking = async (id: string) => {
         console.log('data',data);
         return data;
         };
+
+    export const signIn = async (newDate:string) => {
+        console.log('signIn for you',newDate);
+        const { data, error } = await supabase
+        .from("sign")
+        .update([{ last_logged_in:new Date(), time_before:newDate}])
+        .match({ id: 0 })
+    if (error) {
+        return error;
+    }
+    return data;
+    };
+  

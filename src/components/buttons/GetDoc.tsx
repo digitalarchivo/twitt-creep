@@ -6,35 +6,58 @@ interface Props {
 }
 
 const GetDoc: React.FC<Props> = () => {
-    const handleAddAll = () => {
+  const handleAddAll = () => {
+    console.log(accounts);
+    fetch('http://127.0.0.1:5000/api/createList', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(accounts)
+    })
+      .then(response => response.json())
+      .then((data) => {
+        console.log('Success:', data)
+        localStorage.removeItem('usernames');
+        setAccounts([]);
+        window.location.reload();
+      })
+      .catch((error) => console.log('Error:', error));
+  }
 
-    }
-    const accounts1 = JSON.parse(localStorage.getItem('usernames') || '[]');
-    const [accounts, setAccounts] = useState<string[]|[]>(accounts1);
+  const ISSERVER = typeof window === "undefined";
 
-useEffect(() => {
-  const handleStorageChange = () => {
+  let accounts1 = null;
+if (!ISSERVER) {
+   accounts1 = JSON.parse(localStorage.getItem('usernames') || '[]');
+  // Rest of the code
+}
+  const [accounts, setAccounts] = useState<string[] | []>(accounts1? accounts1: []);
 
-    const accounts1 = JSON.parse(localStorage.getItem('usernames') || '[]');
-    setAccounts(accounts1);
-  };
+  useEffect(() => {
+    const handleStorageChange = () => {
 
-  window.addEventListener('storage', handleStorageChange);
-  
-  // Clean up the event listener when the component unmounts
-  return () => {
-    window.removeEventListener('storage', handleStorageChange);
-  };
-}, []);
-    if (accounts != null && accounts.length > 0) {
+      const accounts1 = JSON.parse(localStorage.getItem('usernames') || '[]');
+      setAccounts(prev => accounts1);
 
-        return (
-            <div className='fixed p-4 bg-green-500 flex flex-col text-center rounded-full ml-[4.75rem] opacity-70 xl:opacity-100 hover:opacity-100 '>
-                <div className='text-white text-lg'>You are currently saving {accounts.length} accounts</div>
-                <button onClick={handleAddAll} className='p-x4 bg-amber-400 rounded-3xl hover:scale-110'>Add To List</button>
-            </div>
-        )
-    }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, []);
+  if (accounts != null && accounts.length > 0) {
+
+    return (
+      <div className='fixed p-4 bg-green-500 flex flex-col text-center rounded-full ml-[4.75rem] opacity-70 xl:opacity-100 hover:opacity-100 '>
+        <div className='text-white text-lg'>You are currently saving {accounts.length} accounts</div>
+        <button onClick={handleAddAll} className='p-x4 bg-amber-400 rounded-3xl hover:scale-110'>Add To List</button>
+      </div>
+    )
+  }
 }
 
 export default GetDoc

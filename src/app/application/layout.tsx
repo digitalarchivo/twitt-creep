@@ -1,4 +1,4 @@
-import './globals.css'
+import Header from '@/components/nav/Header'
 import { Inter } from 'next/font/google'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -14,12 +14,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={'inside-box'}>
-        <div >
+    <div>
+
+          <Header />
           {children}
-        </div>
-      </body>
-    </html>
+    </div>
+      
   )
 }

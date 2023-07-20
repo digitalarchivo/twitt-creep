@@ -1,9 +1,9 @@
 import React from 'react'
 import Image from 'next/image'
-import avatar1 from "@assets/avatar1.png"
 import avatar2 from "../../../../public/assets/avatar2.png"
 import Add from '@/components/buttons/Add';
 import Followers from './Followers';
+import Link from 'next/link';
 
 interface Props {
     bio: string | null;
@@ -53,20 +53,10 @@ function createHyperlinks(description: string) {
 }
 
 const FollowingCard: React.FC<Props> = ({ name, username, bio, createdAt,followers }) => {
-    if(name.includes('Bagsy')){
-        const words = bio?.split('\n');
-        let num = 0;
-        words?.forEach((word) => {
-            num ++
-            if(word.includes('@')){
-                console.log(num,word);
-            }
-        })
-    }
     return (
         <div className=' w-full bg-gray-200 text-center rounded-2xl m-1 relative'>
             <div className='flex flex-row '>
-                <a className='' href={`https://twitter.com/${name}`} target='blank'>
+                <Link  href={`https://twitter.com/${name}`} target='blank' >
                     <div className=' flex flex-row'>
                         <div className='flex flex-col ml-2'>
                             <Image
@@ -79,15 +69,15 @@ const FollowingCard: React.FC<Props> = ({ name, username, bio, createdAt,followe
 
                     </div>
 
-                </a>
+                </Link>
 
                 <div className='flex flex-row justify-between w-full '>
-                    <a href={`https://twitter.com/${name}`} target='blank'>
+                    <Link href={`https://twitter.com/${name}`} target='blank' >
                         <div className='flex flex-col mt-2'>
                             <p className='text-lg text-left text-blue-700'>{name}</p>
                             <p className='text-lg text-left text-blue-400'>{username}</p>
                         </div>
-                    </a>
+                    </Link>
 
                     <div className='flex flex-col mt-4 gap-y-2'>
                         <Followers followers={followers}/>

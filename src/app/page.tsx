@@ -1,10 +1,6 @@
-import FollowingContainer from '@/components/cards/Followings/FollowingContainer';
-import Monitoring from '@/components/cards/Monitor/Monitoring';
+import LogIn from '@/components/buttons/LogIn';
+import { getLastLogIn } from '@/components/utils/supabase';
 import React from 'react'
-import TwitImage from '@/components/twit/TwitImage';
-import GetDoc from '@/components/buttons/GetDoc';
-import { getAllFollowingsSince, getLastLogIn, getTracking } from '@/components/utils/supabase';
-
 
 interface Props {
     
@@ -13,28 +9,19 @@ interface Props {
 export default async function page({}: Props) {
     
     const signIn = await getLastLogIn();
-    const acct = await getAllFollowingsSince(signIn.last_logged_in);
-    const lastUpdated = new Date(signIn.last_updated).toDateString();
+      // @ts-ignore
+    console.log(signIn[0]);
+    // @ts-ignore
+    console.log('last logged  in', new Date(signIn[0].last_logged_in))
 
     return (
-        <div className='m-2 relative'>
-         <TwitImage />
-          <h1 className='text-[5rem] my-20 text-center text-sky-600'>Twit CREEP</h1>
-          <div className='flex flex-col'>
-             <h1 className='text-amber-400 text-5xl text-center'>Monitoring</h1>
-
-              <Monitoring />
-            <div className='flex flex-row justify-between'>
-
-            <h1 className='text-sky-200 text-xl xl:text-5xl text-left ml-32'>New Follows</h1>
-            <p className='text-sky-200 text-lg xl:text-3xl text-left '>Last updated {lastUpdated}</p>
+        <div className='flex  h-screen justify-center items-center '>
+            <div className='h-40 w-80  text-5xl text-white outside-box text-center hover:scale-125 hover:bg-blue-800'>
+                {/* @ts-ignore */}
+                
+                <LogIn logIn={signIn[0].last_logged_in}/>
             </div>
-            <hr />
-            <div className='grid mx-12 grid-cols-1 2xl:grid-cols-3 mt-4'>
-              <GetDoc/>
-            <FollowingContainer accts={acct} />
-            </div> 
-          </div>
         </div>
     )
 }
+

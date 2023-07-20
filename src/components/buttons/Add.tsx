@@ -6,13 +6,16 @@ interface Props {
 
 }
 const Add: React.FC<Props> = ({ username }) => {
-    let usernames = localStorage.getItem('usernames') ? JSON.parse(localStorage.getItem('usernames')!) : [];
+    const ISSERVER = typeof window === "undefined";
+
+    let usernames = null;
+  if (!ISSERVER) {
+     usernames = localStorage.getItem('usernames') ? JSON.parse(localStorage.getItem('usernames')!) : [];
+    // Rest of the code
+  }
     const [added, setAdded] = React.useState<boolean>(usernames != null && usernames.includes(username));
     function addToLocalStorage(username: string) {
         if (typeof window !== 'undefined') {
-
-
-
             let usernames: string[] = localStorage.getItem('usernames') ? JSON.parse(localStorage.getItem('usernames')!) : [];
 
             if (usernames.includes(username)) {
