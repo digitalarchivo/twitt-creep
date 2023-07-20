@@ -30,10 +30,6 @@ export default async function page({}: Props) {
 
     // @ts-ignore
     const lastCheckedIn = new Date(signIn[0].time_before).toDateString();
-
-    
-    // @ts-ignore
-    console.log('last logged  in', new Date(signIn[0].time_before).toISOString().split('T')[0])
     return (
         <div className='m-2 relative'>
          <TwitImage />
