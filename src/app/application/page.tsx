@@ -4,6 +4,7 @@ import React, { Suspense } from 'react'
 import TwitImage from '@/components/twit/TwitImage';
 import GetDoc from '@/components/buttons/GetDoc';
 import { getAllFollowingsSince, getLastLogIn, getTracking } from '@/components/utils/supabase';
+import Countdown from '@/components/countdowns/Countdown';
 
 interface Props {
     
@@ -37,6 +38,11 @@ export default async function page({}: Props) {
         <div className='m-2 relative'>
          <TwitImage />
           <h1 className='text-[5rem] my-20 text-center text-sky-600'>Twit CREEP</h1>
+          <div className='text-center text-5xl text-green-400 flex flex-row justify-center gap-x-4'>
+            <p className='text-white'>Next update:</p>
+          {/* @ts-ignore */}
+          <Countdown targetDate={new Date(signIn[0].last_updated)} />
+          </div>
           <div className='flex flex-col'>
              <h1 className='text-amber-400 text-5xl text-center'>Monitoring</h1>
 
