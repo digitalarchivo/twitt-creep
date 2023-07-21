@@ -2,13 +2,11 @@
 import React, { useEffect, useState } from 'react'
 
 interface Props {
-
 }
-
 const GetDoc: React.FC<Props> = () => {
   const handleAddAll = () => {
     console.log(accounts);
-    fetch('http://127.0.0.1:5000/api/createList', {
+    fetch('https://vercel.com/kbusch54/twit-nine.vercel.app', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
