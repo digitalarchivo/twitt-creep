@@ -6,7 +6,7 @@ interface Props {
 const GetDoc: React.FC<Props> = () => {
   const handleAddAll = () => {
     console.log(accounts);
-    fetch('https://vercel.com/kbusch54/twit-nine.vercel.app', {
+    fetch('https://vercel.live/link/twit-36396nb6t-kbusch54.vercel.app', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
