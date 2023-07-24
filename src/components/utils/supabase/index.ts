@@ -12,7 +12,7 @@ export const getTracking = async () => {
     return data;
     };
 
-export const getAllFollowingsSince = cache(async (since: string) => {
+export const getAllFollowingsSince = async (since: string) => {
     const { data, error } = await supabase
         .from("Followed")
         .select("*")
@@ -21,7 +21,7 @@ export const getAllFollowingsSince = cache(async (since: string) => {
         throw error;
     }
     return data;
-    });
+    };
     export const getAllFollowingsSinceFull = async (since: string) => {
         const { data, error } = await supabase
             .from("Followed")
