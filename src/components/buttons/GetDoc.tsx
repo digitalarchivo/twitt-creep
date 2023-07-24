@@ -45,7 +45,13 @@ const GetDoc: React.FC<Props> = () => {
         setAccounts([]);
         window.location.reload();
       })
-      .catch((error) => console.log('Error:', error));
+      .catch(() => {
+        setIsLoading(prev=>false);
+        setIsOpen(false);
+        localStorage.removeItem('usernames');
+        setAccounts([]);
+        window.location.reload();
+      });
   }
 
   const ISSERVER = typeof window === "undefined";
