@@ -95,7 +95,6 @@ if (!ISSERVER) {
       <div className='fixed p-4 bg-green-500 flex flex-col text-center rounded-full ml-[4.75rem] opacity-70 xl:opacity-100 hover:opacity-100 '>
         <div className='text-white text-lg'>You are currently saving {accounts.length} accounts</div>
         <button onClick={handleAddAll} className='p-x4 bg-amber-400 rounded-3xl hover:scale-110'>Add To List</button>
-        <div className={`${isLoading?'absolute flex h-[90vh] w-[70-vw] opacity-50 bg-slate-700 text-center':'hidden'}`}>Adding to list........</div>
         <Modal
                 isOpen={modalIsOpen}
                 onAfterOpen={afterOpenModal}
@@ -108,9 +107,8 @@ if (!ISSERVER) {
                     <div className='text-center my-2'>
                         {isLoading && (
                             <div className='animate-pulse'>
-                                <p className='text-xl'>Deleting Monitored Account from DB</p>
-                                <button  className='bg-purple-600 p-3 rounded-2xl mx-8 mt-6 hover:scale-125 text-gray-500'>------------------</button>
-                                <button  className='bg-red-600 p-3 rounded-2xl mx-8 mt-6 hover:scale-125 text-gray-500'>----------------------------------------------------------</button>
+                                <p className='text-xl'>Adding to List</p>
+                                <div className='bg-purple-600 p-3 rounded-2xl mx-8 mt-6 hover:scale-125 text-blue-500'>Loading.....</div>
                             </div>
                         )}
                     </div>
