@@ -28,6 +28,7 @@ const GetDoc: React.FC<Props> = () => {
   const handleAddAll = () => {
     console.log('accounts to print',JSON.stringify(accounts));
     setIsLoading(prev=>true);
+    setIsOpen(true);
     fetch('https://twit-bot-joe-024adbd685fc.herokuapp.com/api/createList', {
       method: 'POST',
       headers: {
@@ -38,6 +39,7 @@ const GetDoc: React.FC<Props> = () => {
       .then(response => response.json())
       .then((data) => {
         setIsLoading(prev=>false);
+        setIsOpen(false);
         console.log('Success:', data)
         localStorage.removeItem('usernames');
         setAccounts([]);
