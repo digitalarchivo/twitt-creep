@@ -18,7 +18,8 @@ const Countdown: React.FC<CountdownProps> = ({ targetDate }) => {
     const calculateTimeLeft = () => {
       const currentTime = new Date();
       const difference = currentDate.getTime() - currentTime.getTime();
-      setTimeLeft(Math.max(0, difference));
+      setTimeLeft(()=>Math.max(0, difference));
+      console.log('time left',timeLeft);
     };
 
     calculateTimeLeft();
