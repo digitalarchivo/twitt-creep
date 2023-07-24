@@ -6,6 +6,8 @@ interface CountdownProps {
 }
 
 const Countdown: React.FC<CountdownProps> = ({ targetDate }) => {
+  console.log('targetDate',targetDate);
+ 
   const [timeLeft, setTimeLeft] = useState<number>(0);
   let currentDate = new Date(targetDate)
   let currentDay = currentDate.getDate();
