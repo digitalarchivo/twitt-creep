@@ -56,7 +56,7 @@ if (!ISSERVER) {
       <div className='fixed p-4 bg-green-500 flex flex-col text-center rounded-full ml-[4.75rem] opacity-70 xl:opacity-100 hover:opacity-100 '>
         <div className='text-white text-lg'>You are currently saving {accounts.length} accounts</div>
         <button onClick={handleAddAll} className='p-x4 bg-amber-400 rounded-3xl hover:scale-110'>Add To List</button>
-        <div className='absolute h-[90vh] w-[70-vw] opacity-5 bg-slate-700 text-center'>Adding to list........</div>
+        <div className={`${isLoading?'absolute flex h-[90vh] w-[70-vw] opacity-50 bg-slate-700 text-center':'hidden'}`}>Adding to list........</div>
       </div>
     )
   }
