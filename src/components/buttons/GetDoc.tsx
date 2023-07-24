@@ -5,22 +5,22 @@ interface Props {
 }
 const GetDoc: React.FC<Props> = () => {
   const handleAddAll = () => {
-    console.log(accounts);
-    fetch('https://twit-bot-joe-024adbd685fc.herokuapp.com/api/createList', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(accounts)
-    })
-      .then(response => response.json())
-      .then((data) => {
-        console.log('Success:', data)
-        localStorage.removeItem('usernames');
-        setAccounts([]);
-        window.location.reload();
-      })
-      .catch((error) => console.log('Error:', error));
+    console.log(JSON.stringify(accounts));
+    // fetch('https://twit-bot-joe-024adbd685fc.herokuapp.com/api/createList', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify(accounts)
+    // })
+      // .then(response => response.json())
+      // .then((data) => {
+      //   console.log('Success:', data)
+      //   localStorage.removeItem('usernames');
+      //   setAccounts([]);
+      //   window.location.reload();
+      // })
+      // .catch((error) => console.log('Error:', error));
   }
 
   const ISSERVER = typeof window === "undefined";
