@@ -12,11 +12,12 @@ const Countdown: React.FC<CountdownProps> = ({ targetDate }) => {
   let currentDate = new Date(targetDate)
   let currentDay = currentDate.getDate();
   let nextDay = currentDay + 1;
-  currentDate.setDate(nextDay);
+  currentDate = new Date(nextDay);
   
   useEffect(() => {
     const calculateTimeLeft = () => {
       const currentTime = new Date();
+      console.log('current time',currentTime);
       const difference = currentDate.getTime() - currentTime.getTime();
       setTimeLeft(()=>Math.max(0, difference));
       console.log('time left',timeLeft);
