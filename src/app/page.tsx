@@ -9,6 +9,7 @@ interface Props {
 export default async function page({}: Props) {
     
     const signIn = await getLastLogIn();
+    console.log('sign in',signIn);
 
     return (
         <div className='flex  h-screen justify-center items-center '>

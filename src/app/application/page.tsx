@@ -24,9 +24,9 @@ export default async function page({ }: Props) {
   const signIn = await getLastLogIn();
 
   // @ts-ignore
+  console.log('time before date',signIn);
+  // @ts-ignore
   const acct = await getAllFollowingsSince(new Date(signIn[0].time_before).toISOString().split('T')[0]);
-   // @ts-ignore
-   console.log('time before date', new Date(signIn[0].time_before).toISOString().split('T')[0]);
   // @ts-ignore
   const lastUpdated = new Date(signIn[0].last_updated).toDateString();
 

@@ -6,21 +6,21 @@ interface CountdownProps {
 }
 
 const Countdown: React.FC<CountdownProps> = ({ targetDate }) => {
-  console.log('targetDate',targetDate);
- 
   const [timeLeft, setTimeLeft] = useState<number>(0);
-  let currentDate = new Date(targetDate)
-  let currentDay = currentDate.getDate();
-  let nextDay = currentDay + 1;
-  currentDate = new Date(nextDay);
+  function add24Hours(): Date {
+    // Convert the date string to a Date object
+    let date = new Date(targetDate);
+  
+    // Add 24 hours in milliseconds
+    date.setTime(date.getTime() + 24*60*60*1000);
+    return date;
+  }
   
   useEffect(() => {
     const calculateTimeLeft = () => {
       const currentTime = new Date();
-      console.log('current time',currentTime);
-      const difference = currentDate.getTime() - currentTime.getTime();
+      const difference = add24Hours().getTime() - currentTime.getTime();
       setTimeLeft(()=>Math.max(0, difference));
-      console.log('time left',timeLeft);
     };
 
     calculateTimeLeft();
@@ -29,7 +29,7 @@ const Countdown: React.FC<CountdownProps> = ({ targetDate }) => {
     return () => {
       clearInterval(intervalId);
     };
-  }, [currentDate]);
+  }, [targetDate]);
 
   const formatTimeLeft = (milliseconds: number) => {
     if(milliseconds === 0){ 

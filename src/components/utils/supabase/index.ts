@@ -34,11 +34,13 @@ export const getAllFollowingsSince = async (since: string) => {
         };
 
 export const getLastLogIn = async () => {
-    const {data} = await supabase
+    const { data, error } = await supabase
         .from('sign')
-        .select("*")
-        .eq('id', 0)
- 
+        .select("**")
+    console.log('getLastLogIn',data);
+    if (error) {
+        console.log('getLastLogIn error',error);
+    }
     return data;
     };
 

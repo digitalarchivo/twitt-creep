@@ -109,12 +109,12 @@ if (!ISSERVER) {
                 style={customStyles}
                 contentLabel="Remove Collateral Modal"
             >
-                <div className={`border-2 border-purple-800 p-12 flex flex-col text-blue-400 rounded-xl inside-box ${isLoading&& 'shadow-xl shadow-red-700'}`}>
-                    <div className='text-center my-2'>
+                <div className={`border-2 border-purple-800 p-64 flex flex-col text-blue-400 rounded-xl inside-box ${isLoading&& 'shadow-xl shadow-red-700'}`}>
+                    <div className='text-center my-2 p-64'>
                         {isLoading && (
                             <div className='animate-pulse'>
-                                <p className='text-xl'>Adding to List</p>
-                                <div className='bg-purple-600 p-3 rounded-2xl mx-8 mt-6 hover:scale-125 text-blue-500'>Loading.....</div>
+                                <p className='text-5xl'>Adding to List</p>
+                                <div className='bg-purple-600 p-12 text-3xl rounded-2xl mx-8 mt-6 hover:scale-125 text-blue-500'>Loading.....</div>
                             </div>
                         )}
                     </div>
