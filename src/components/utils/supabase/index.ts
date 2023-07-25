@@ -36,7 +36,7 @@ export const getAllFollowingsSince = async (since: string) => {
 export const getLastLogIn = async () => {
     const { data, error } = await supabase
         .from('sign')
-        .select("**")
+        .select("last_logged_in,time_before,last_updated")
     console.log('getLastLogIn',data);
     if (error) {
         console.log('getLastLogIn error',error);
