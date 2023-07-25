@@ -28,10 +28,10 @@ export default async function page({ }: Props) {
   // @ts-ignore
   const acct = await getAllFollowingsSince(new Date(signIn[0].time_before).toISOString().split('T')[0]);
   // @ts-ignore
-  const lastUpdated = new Date(signIn[0].last_updated).toDateString();
+  const lastUpdated = new Date(signIn[0].last_updated).toLocaleDateString();
 
   // @ts-ignore
-  const lastCheckedIn = new Date(signIn[0].time_before).toDateString();
+  const lastCheckedIn = new Date(signIn[0].time_before).toLocaleDateString();
   return (
     <div className='m-2 relative'>
       <TwitImage />

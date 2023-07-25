@@ -10,7 +10,6 @@ const Countdown: React.FC<CountdownProps> = ({ targetDate }) => {
   function add24Hours(): Date {
     // Convert the date string to a Date object
     let date = new Date(targetDate);
-  
     // Add 24 hours in milliseconds
     date.setTime(date.getTime() + 24*60*60*1000);
     return date;
