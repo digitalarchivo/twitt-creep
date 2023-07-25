@@ -12,8 +12,8 @@ const Header: React.FC<Props> = () => {
                 <div className='flex justify-between gap-x-2 lg:gap-x-12'>
 
                     <a className='bg-purple-900 text-amber-400 rounded-3xl hover:scale-125 p-5' href='/application'>Home</a>
-                    <a className='bg-purple-900 text-amber-400 rounded-3xl hover:scale-125 p-5' href='/application/history'>History</a>
-                    <div className='bg-purple-900 text-amber-400 rounded-3xl hover:scale-125 p-5'>Notifications</div>
+                    <a className='bg-purple-900 text-amber-400 rounded-3xl hover:scale-125 p-5' href='/application/history'>Added</a>
+                    <a className='bg-purple-900 text-amber-400 rounded-3xl hover:scale-125 p-5' href='/application/deleted'>Ignored</a>
                     <ManualTrack/>
                     <a href='/' className='bg-red-900 text-amber-400 rounded-3xl hover:scale-125 p-5'>Log Out</a>
                 </div>

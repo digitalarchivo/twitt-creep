@@ -5,6 +5,7 @@ import Add from '@/components/buttons/Add';
 import Followers from './Followers';
 import Link from 'next/link';
 import Track from '@/components/buttons/Track';
+import Ignore from '@/components/buttons/Ignore';
 
 interface Props {
     bio: string | null;
@@ -13,7 +14,8 @@ interface Props {
     createdAt: string;
     followers: string[];
     tracked: string[];
-
+    reload: () => void;
+    state:'true'|'false'|'null'
 }
 function createHyperlinks(description: string) {
     const words = description.split('\n'); //split by space to get each word
@@ -59,9 +61,8 @@ function createHyperlinks(description: string) {
     return output;
 }
 
-const FollowingCard: React.FC<Props> = ({ name, username, bio, createdAt, followers,tracked }) => {
+const FollowingCard: React.FC<Props> = ({ name, username, bio, createdAt, followers,tracked,reload,state }) => {
 
-  
     return (
         <div className=' w-full bg-gray-200 text-center rounded-2xl m-1 relative'>
             <div className='flex flex-row '>
@@ -90,7 +91,11 @@ const FollowingCard: React.FC<Props> = ({ name, username, bio, createdAt, follow
 
                     <div className='flex flex-col mt-4 gap-y-2'>
                         <Followers followers={followers} />
-                        <Add username={name} />
+                        <div className='flex flex-col  gap-y-2 2xl:hidden'>
+
+                        <Add username={name} reload={reload} state={state}   />
+                        <Ignore username={name} reload={reload} state={state} />
+                        </div>
                         <Track username={username} account={name} description={bio} tracking={tracked} />
                     </div>
                 </div>

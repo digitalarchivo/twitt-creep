@@ -7,14 +7,14 @@ interface Props {
 
 }
 
-export default async function page({}: Props) {
+export default async function page({ }: Props) {
 
 
-        // @ts-ignore
-        const acct = await getAllFollowings();
-      
+    // @ts-ignore
+    const acct = await getAllFollowings();
 
-    
+
+
     return (
         <div className='text-center m-24'>
             {/* <div className='text-5xl text-white '>Pick Your Dates</div>
@@ -31,10 +31,10 @@ export default async function page({}: Props) {
             <div className=''>
                 <GetDoc />
                 {acct && acct.length > 0 && (
-                    <FollowingContainer accts={acct} listStatus={true} />
+                    <FollowingContainer accts={acct} listStatus={false} />
                 )}
             </div>
         </div>
     )
-                }
+}
 

@@ -3,7 +3,7 @@ import Monitoring from '@/components/cards/Monitor/Monitoring';
 import React, { Suspense } from 'react'
 import TwitImage from '@/components/twit/TwitImage';
 import GetDoc from '@/components/buttons/GetDoc';
-import { getAllFollowingsSince, getLastLogIn } from '@/components/utils/supabase';
+import { getAllFollowings, getLastLogIn } from '@/components/utils/supabase';
 import Countdown from '@/components/countdowns/Countdown';
 
 interface Props {
@@ -26,7 +26,7 @@ export default async function page({ }: Props) {
   // @ts-ignore
   console.log('time before date',signIn);
   // @ts-ignore
-  const acct = await getAllFollowingsSince(new Date(signIn[0].time_before).toISOString().split('T')[0]);
+  const acct = await getAllFollowings();
   // @ts-ignore
   const lastUpdated = new Date(signIn[0].last_updated).toLocaleDateString();
 
@@ -55,13 +55,11 @@ export default async function page({ }: Props) {
           <p className='text-sky-200 text-lg xl:text-3xl text-left '>Last updated {lastUpdated}</p>
         </div>
         <hr />
-        <div className='grid mx-12 grid-cols-1 2xl:grid-cols-3 mt-4'>
-          <GetDoc />
+          {/* <GetDoc /> */}
           {acct && (
             // @ts-ignore
-            <FollowingContainer accts={acct} />
+            <FollowingContainer accts={acct} listStatus={null} />
           )}
-        </div>
       </div>
     </div>
   )

@@ -20,7 +20,6 @@ const Track: React.FC<Props> = ({ username, account, description, tracking }) =>
     });
     const [isAdded, setIsAdded] = React.useState(added);
     useEffect(() => {
-        console.log('tracking', tracking);
         return () => {
             // cleanup
         }
@@ -31,18 +30,18 @@ const Track: React.FC<Props> = ({ username, account, description, tracking }) =>
         added = true;
         addTracking(account, username, description ? description : '').then((res) => {
             console.log(res);
+            setIsAdded(prev=>true);
+            window.location.reload();
         })
-        setIsAdded(prev=>true);
-        window.location.reload();
     }
     const onDelete = () => {
         console.log('delete');
         added = false;
-        setIsAdded(prev=>false);
         deleteTracking(account).then((res) => {
+            setIsAdded(prev=>false);
             console.log(res);
+            window.location.reload();
         })
-        window.location.reload();
     }
     if (!isAdded) {
         return (

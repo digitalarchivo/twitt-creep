@@ -15,18 +15,27 @@ export const getTracking = async () => {
 export const getAllFollowingsSince = async (since: string) => {
     const { data, error } = await supabase
         .from("Followed")
-        .select("*")
+        .select("")
         .gte('created_at', since);
     if (error) {
         throw error;
     }
     return data;
     };
-    export const getAllFollowingsSinceFull = async (since: string) => {
+    export const getAllFollowings = async () => {
         const { data, error } = await supabase
             .from("Followed")
-            .select("*")
-            .gte('created_at', since);
+            .select("account,username,created_at,jk_follows,description,followed_by,updated_at")
+        if (error) {
+            throw error;
+        }
+        return data;
+        };
+    export const getAllFollowingsSinceFull = async () => {
+        const { data, error } = await supabase
+            .from("Followed")
+            .select()
+            .is('name', null)
         if (error) {
             throw error;
         }
@@ -64,6 +73,12 @@ export const deleteTracking = async (id: string) => {
         console.log('data',data);
         return data;
         };
+        export const addToList = async (account:string,action:any)=>{
+            const { data, error } = await supabase
+            .from("Followed")
+            .update([{jk_follows:action }])
+            .eq('account', account)
+        }
 
     export const signIn = async (newDate:string) => {
         console.log('signIn for you',newDate);
