@@ -1,7 +1,7 @@
 'use client'
 import React, { useState, useEffect } from 'react'
 import FollowingCard from './FollowingCard'
-import { getAllFollowings, getTracking, massAdoption } from '@/components/utils/supabase'
+import { getAllFollowings, getLastUpdated, getTracking, massAdoption } from '@/components/utils/supabase'
 import { useRouter } from 'next/navigation'
 import Add from '@/components/buttons/Add'
 import Ignore from '@/components/buttons/Ignore'
@@ -15,11 +15,12 @@ const FollowingContainer: React.FC<Props> = ({ accts, listStatus }) => {
     const [following, setFollowing] = useState<any>(accts);
     const [tracked, setTracked] = useState<any>([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [updated, setUpdated] = useState<any>('');
 
     const router = useRouter();
     const getNum = () => {
         let num = 0;
-        following.forEach((item: { jk_follows: boolean | null}) => {
+        following.forEach((item: { jk_follows: boolean | null }) => {
             if (item.jk_follows == listStatus) {
                 num++;
             }
@@ -30,6 +31,9 @@ const FollowingContainer: React.FC<Props> = ({ accts, listStatus }) => {
         const res = await getTracking()
         setTracked(res);
         const res2 = await getAllFollowings();
+        const lastUpdated = await getLastUpdated();
+        // @ts-ignore
+        setUpdated(lastUpdated[0].last_updated);
         setFollowing(res2);
         setIsLoading(false);
     }
@@ -40,8 +44,8 @@ const FollowingContainer: React.FC<Props> = ({ accts, listStatus }) => {
         }
     }, [])
     const getList = () => {
-        let listOfAccts:any[] = [];
-        following.forEach((item: { jk_follows: boolean | null,account:string }) => {
+        let listOfAccts: any[] = [];
+        following.forEach((item: { jk_follows: boolean | null, account: string }) => {
             if (item.jk_follows == listStatus) {
                 listOfAccts.push(item);
             }
@@ -49,15 +53,15 @@ const FollowingContainer: React.FC<Props> = ({ accts, listStatus }) => {
         return listOfAccts;
     }
     const addAll = async () => {
-            massAdoption(getList(),true).then((res) => {
-                reload();
-            }).catch((err) => {
-                console.log(err);
-                reload();
-            })
+        massAdoption(getList(), true).then((res) => {
+            reload();
+        }).catch((err) => {
+            console.log(err);
+            reload();
+        })
     }
     const ignoreAll = async () => {
-        massAdoption(getList(),false).then((res) => {
+        massAdoption(getList(), false).then((res) => {
             reload();
         }).catch((err) => {
             console.log(err);
@@ -90,16 +94,28 @@ const FollowingContainer: React.FC<Props> = ({ accts, listStatus }) => {
     }
     return (
         <>
-            <div className='text-center'>
-                <h1 className='2xl:col-start-2 col-span-1 text-amber-400 text-5xl text-center my-2'>List Length {getNum()}</h1>
+            <div className='flex flex-row justify-between'>
+                <h1 className='text-center  text-amber-400 text-5xl  my-2'>List Length: {getNum()}</h1>
+                <h1 className=' text-right text-2xl mt-8 text-white flex flex-row'>
+                    <p>Last Updated: </p>
+                    {updated ? (
+
+                        <>
+                            <p className='text-sky-500 px-8'> {new Date(updated).toLocaleDateString()}</p>
+                            <span className='text-'>{new Date(updated).toLocaleTimeString()}</span>
+                        </>
+                    )
+                        : (<></>)}
+                </h1>
             </div>
+            <hr />
             <div className=' '>
                 {window.location.href.endsWith('application') && (
                     <div className='flex flex-row justify-between'>
-                    <button onClick={ignoreAll} className='p-8 bg-red-500 rounded-full text-white text-5xl m-4 hover:scale-150 border-4 border-white'>Ignore All</button>
-                    <button onClick={addAll} className='p-8 bg-green-500 rounded-full text-white text-5xl m-4 hover:scale-150 border-4 border-white'>Add All</button>
-                </div>
-                    )}
+                        <button onClick={ignoreAll} className='p-8 bg-red-500 rounded-full text-white text-5xl m-4 hover:scale-150 border-4 border-white'>Ignore All</button>
+                        <button onClick={addAll} className='p-8 bg-green-500 rounded-full text-white text-5xl m-4 hover:scale-150 border-4 border-white'>Add All</button>
+                    </div>
+                )}
                 {following.map((item: { jk_follows: string | boolean | null; account: string; username: string; description: string | null; created_at: string; followed_by: string[] }, index: any) => (
                     <>
                         {listStatus == item.jk_follows ? (
@@ -123,7 +139,7 @@ const FollowingContainer: React.FC<Props> = ({ accts, listStatus }) => {
                     </>
                 ))}
             </div>
-       
+
         </>
     )
 }

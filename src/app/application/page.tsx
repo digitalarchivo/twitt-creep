@@ -49,11 +49,8 @@ export default async function page({ }: Props) {
         </Suspense>
         <div className='flex flex-row justify-between'>
 
-          <h1 className='text-sky-200 text-xl xl:text-5xl text-left ml-32'>New Follows</h1>
-          <p className='text-sky-200 text-lg xl:text-3xl text-left '>Last Checked In {lastCheckedIn}</p>
-          <p className='text-sky-200 text-lg xl:text-3xl text-left '>Last updated {lastUpdated}</p>
         </div>
-        <hr />
+      
           {/* <GetDoc /> */}
           {acct && (
             // @ts-ignore

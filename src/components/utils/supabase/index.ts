@@ -84,6 +84,16 @@ export const deleteTracking = async (id: string) => {
             .from("Followed")
             .insert ([{account:account,username:username, description:description, jk_follows:true, created_at:new Date() }])
         }
+        export const getLastUpdated = async () => {
+            const { data, error } = await supabase
+                .from('sign')
+                .select("last_updated")
+                .eq('id', 0)
+            if (error) {
+                console.log('getLastUpdated error',error);
+            }
+            return data;
+            };
 
         export const massAdoption = async (accounts:any[],action:any)=>{
             
