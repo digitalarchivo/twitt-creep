@@ -90,7 +90,10 @@ const FollowingCard: React.FC<Props> = ({ name, username, bio, createdAt, follow
                     </Link>
 
                     <div className='flex flex-col mt-4 gap-y-2'>
-                        <Followers followers={followers} />
+                        {followers && (
+
+                            <Followers followers={followers} />
+                        )}
                         <div className='flex flex-col  gap-y-2 2xl:hidden'>
 
                         <Add username={name} reload={reload} state={state}   />
