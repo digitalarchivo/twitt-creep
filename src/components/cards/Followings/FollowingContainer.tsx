@@ -1,7 +1,7 @@
 'use client'
 import React, { useState, useEffect } from 'react'
 import FollowingCard from './FollowingCard'
-import { getAllFollowings, getTracking } from '@/components/utils/supabase'
+import { getAllFollowings, getTracking, massAdoption } from '@/components/utils/supabase'
 import { useRouter } from 'next/navigation'
 import Add from '@/components/buttons/Add'
 import Ignore from '@/components/buttons/Ignore'
@@ -19,7 +19,7 @@ const FollowingContainer: React.FC<Props> = ({ accts, listStatus }) => {
     const router = useRouter();
     const getNum = () => {
         let num = 0;
-        following.forEach((item: { jk_follows: boolean | null }) => {
+        following.forEach((item: { jk_follows: boolean | null}) => {
             if (item.jk_follows == listStatus) {
                 num++;
             }
@@ -39,6 +39,31 @@ const FollowingContainer: React.FC<Props> = ({ accts, listStatus }) => {
             // here you can clean the effect in case the component gets unmonth before the async function ends
         }
     }, [])
+    const getList = () => {
+        let listOfAccts:string[] = [];
+        following.forEach((item: { jk_follows: boolean | null,account:string }) => {
+            if (item.jk_follows == listStatus) {
+                listOfAccts.push(item.account);
+            }
+        })
+        return listOfAccts;
+    }
+    const addAll = async () => {
+            massAdoption(getList(),true).then((res) => {
+                reload();
+            }).catch((err) => {
+                console.log(err);
+                reload();
+            })
+    }
+    const ignoreAll = async () => {
+        massAdoption(getList(),false).then((res) => {
+            reload();
+        }).catch((err) => {
+            console.log(err);
+            reload();
+        })
+    }
     const reload = async () => {
 
         await getData();
@@ -69,6 +94,12 @@ const FollowingContainer: React.FC<Props> = ({ accts, listStatus }) => {
                 <h1 className='2xl:col-start-2 col-span-1 text-amber-400 text-5xl text-center my-2'>List Length {getNum()}</h1>
             </div>
             <div className=' '>
+                {window.location.href.endsWith('application') && (
+                    <div className='flex flex-row justify-between'>
+                    <button onClick={addAll} className='p-8 bg-red-500 rounded-full text-white text-5xl m-4 hover:scale-150 border-4 border-white'>Ignore All</button>
+                    <button onClick={ignoreAll} className='p-8 bg-green-500 rounded-full text-white text-5xl m-4 hover:scale-150 border-4 border-white'>Add All</button>
+                </div>
+                    )}
                 {following.map((item: { jk_follows: string | boolean | null; account: string; username: string; description: string | null; created_at: string; followed_by: string[] }, index: any) => (
                     <>
                         {listStatus == item.jk_follows ? (

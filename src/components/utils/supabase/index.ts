@@ -85,6 +85,22 @@ export const deleteTracking = async (id: string) => {
             .insert ([{account:account,username:username, description:description, jk_follows:true, created_at:new Date() }])
         }
 
+        export const massAdoption = async (accounts:string[],action:any)=>{
+            
+            const rowsToUpdate = accounts.map(account => ({
+                account: account,
+                jk_follows: action
+            }));
+            const { data, error } = await supabase
+            .from("Followed")
+            .upsert(rowsToUpdate);
+            if (error) {
+                console.error('Error performing upsert operation:', error);
+              } else if(data) {
+                console.log('Upsert operation successful. Affected rows:', data);
+              }
+
+        }
     export const signIn = async (newDate:string) => {
         console.log('signIn for you',newDate);
         const { data, error } = await supabase
