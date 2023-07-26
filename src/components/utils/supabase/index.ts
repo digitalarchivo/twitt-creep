@@ -85,10 +85,15 @@ export const deleteTracking = async (id: string) => {
             .insert ([{account:account,username:username, description:description, jk_follows:true, created_at:new Date() }])
         }
 
-        export const massAdoption = async (accounts:string[],action:any)=>{
+        export const massAdoption = async (accounts:any[],action:any)=>{
             
-            const rowsToUpdate = accounts.map(account => ({
-                account: account,
+            const rowsToUpdate = accounts.map(item => ({
+                account: item.account,
+                username: item.username,
+                description: item.description,
+                created_at: item.created_at,
+                updated_at: item.updated_at,
+                followed_by: item.followed_by,
                 jk_follows: action
             }));
             const { data, error } = await supabase

@@ -40,10 +40,10 @@ const FollowingContainer: React.FC<Props> = ({ accts, listStatus }) => {
         }
     }, [])
     const getList = () => {
-        let listOfAccts:string[] = [];
+        let listOfAccts:any[] = [];
         following.forEach((item: { jk_follows: boolean | null,account:string }) => {
             if (item.jk_follows == listStatus) {
-                listOfAccts.push(item.account);
+                listOfAccts.push(item);
             }
         })
         return listOfAccts;
@@ -96,8 +96,8 @@ const FollowingContainer: React.FC<Props> = ({ accts, listStatus }) => {
             <div className=' '>
                 {window.location.href.endsWith('application') && (
                     <div className='flex flex-row justify-between'>
-                    <button onClick={addAll} className='p-8 bg-red-500 rounded-full text-white text-5xl m-4 hover:scale-150 border-4 border-white'>Ignore All</button>
-                    <button onClick={ignoreAll} className='p-8 bg-green-500 rounded-full text-white text-5xl m-4 hover:scale-150 border-4 border-white'>Add All</button>
+                    <button onClick={ignoreAll} className='p-8 bg-red-500 rounded-full text-white text-5xl m-4 hover:scale-150 border-4 border-white'>Ignore All</button>
+                    <button onClick={addAll} className='p-8 bg-green-500 rounded-full text-white text-5xl m-4 hover:scale-150 border-4 border-white'>Add All</button>
                 </div>
                     )}
                 {following.map((item: { jk_follows: string | boolean | null; account: string; username: string; description: string | null; created_at: string; followed_by: string[] }, index: any) => (
