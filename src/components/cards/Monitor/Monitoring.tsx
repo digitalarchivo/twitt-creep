@@ -33,7 +33,7 @@ const Monitoring: React.FC<Props> = () => {
     }
  
     return (
-        <div className='flex flex-wrap flex-row gap-12 m-8 justify-center '>
+        <div className='flex flex-wrap flex-row gap-4 m-2 my-8 justify-center '>
             {posts.map((item: { created_at: string; account: string; username: string; }, index: React.Key | null | undefined) => (
                     <MonitorCard key={index} monitoringDate={item.created_at} name={item.account} username={item.username} refetch={refetch}/>
                 ))}

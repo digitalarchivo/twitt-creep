@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import { useForm } from 'react-hook-form';
-import { addTracking } from '../utils/supabase';
+import { addFollowing, addTracking } from '../utils/supabase';
 import { useRouter } from 'next/navigation';
 
 interface Props {
@@ -30,7 +30,7 @@ const customStyles = {
 type FormData = {
     account: string; username: string; description: string;
 };
-const ManualTrack: React.FC<Props> = () => {
+const ManualAddList: React.FC<Props> = () => {
     const [modalIsOpen, setIsOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -54,8 +54,9 @@ const ManualTrack: React.FC<Props> = () => {
     const onSubmit = (data: FormData) => {
         console.log(data);
         setIsLoading(prev => true);
-        addTracking(data.account, data.username, data.description).then((res) => {
+        addFollowing(data.account, data.username, data.description).then((res) => {
             console.log(res);
+            window.location.reload()
         })
         setTimeout(() => {
             console.log('Addition successful.');
@@ -69,7 +70,7 @@ const ManualTrack: React.FC<Props> = () => {
     }
     return (
         <div>
-            <button onClick={openModal} className='bg-purple-600 text-amber-400 rounded-3xl hover:scale-125 p-5'>Manual Track</button>
+            <button onClick={openModal} className='bg-sky-500 text-white rounded-3xl hover:scale-125 p-5'>Manual Add To List</button>
             <Modal
                 isOpen={modalIsOpen}
                 onAfterOpen={afterOpenModal}
@@ -82,7 +83,7 @@ const ManualTrack: React.FC<Props> = () => {
                     <div className='text-center my-2'>
                         {isLoading ? (
                             <div className='animate-pulse'>
-                                <p className='text-xl'>Adding Monitored Account from DB</p>
+                                <p className='text-xl'>Adding Account to List </p>
                                 <div className="space-y-6">
                                     {/* Account Field */}
                                     <div>
@@ -117,7 +118,7 @@ const ManualTrack: React.FC<Props> = () => {
                             </div>
                         ) : (
                             <>
-                                <p className='text-xl'>Enter in The account to track for next period</p>
+                                <p className='text-xl'>Enter in The account to add to list</p>
                                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                                     {/* Account Field */}
                                     <div>
@@ -145,7 +146,7 @@ const ManualTrack: React.FC<Props> = () => {
                                         <textarea {...register('description')} className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md h-20 p-2"></textarea>
                                     </div>
                                     <div>
-                                        <button onClick={closeModal} className='bg-purple-600 p-3 rounded-2xl mx-8 mt-6 hover:scale-125 text-white'>I&#39;m a pussy Bitch</button>
+                                        <button onClick={closeModal} className='bg-purple-600 p-3 rounded-2xl mx-8 mt-6 hover:scale-125 text-white'>Cancel</button>
                                         <button type="submit" className='bg-blue-600 hover:bg-blue-900 border border-transparent  shadow-sm p-3 rounded-2xl mx-8 mt-6 hover:scale-125 text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>Add Account</button>
                                     </div>
                                 </form>
@@ -158,4 +159,4 @@ const ManualTrack: React.FC<Props> = () => {
     )
 }
 
-export default ManualTrack
+export default ManualAddList

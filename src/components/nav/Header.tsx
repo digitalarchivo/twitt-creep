@@ -1,6 +1,7 @@
 import React from 'react'
 import ManualTrack from '../Modals/ManualTrack'
 import Refresh from '../buttons/Refresh'
+import ManualAddList from '../Modals/ManualAddList'
 
 interface Props {
 
@@ -16,6 +17,7 @@ const Header: React.FC<Props> = () => {
                     <a className='bg-purple-900 text-amber-400 rounded-3xl hover:scale-125 p-5' href='/application/history'>Added</a>
                     <a className='bg-purple-900 text-amber-400 rounded-3xl hover:scale-125 p-5' href='/application/deleted'>Ignored</a>
                     <ManualTrack/>
+                    <ManualAddList/>
                     <a href='/' className='bg-red-900 text-amber-400 rounded-3xl hover:scale-125 p-5'>Log Out</a>
                 </div>
     

@@ -79,6 +79,11 @@ export const deleteTracking = async (id: string) => {
             .update([{jk_follows:action }])
             .eq('account', account)
         }
+        export const addFollowing = async (account:string,username:any,description:string)=>{
+            const { data, error } = await supabase
+            .from("Followed")
+            .insert ([{account:account,username:username, description:description, jk_follows:true, created_at:new Date() }])
+        }
 
     export const signIn = async (newDate:string) => {
         console.log('signIn for you',newDate);

@@ -64,7 +64,7 @@ const DeleteModal: React.FC<Props> = ({ account,refetch }) => {
     
     return (
         <div>
-            <button onClick={openModal} className='text-white bg-red-500 p-2 rounded-full hover:scale-125'>Stop Monitoring</button>
+            <button onClick={openModal} className='text-white bg-red-500 p-2 rounded-full hover:scale-125 text-sm'>Stop Monitoring</button>
             <Modal
                 isOpen={modalIsOpen}
                 onAfterOpen={afterOpenModal}

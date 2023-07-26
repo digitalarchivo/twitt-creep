@@ -33,7 +33,7 @@ export default async function page({ }: Props) {
   return (
     <div className='m-2 relative'>
       <TwitImage />
-      <h1 className='text-[5rem] my-20 text-center text-sky-600'>Twit CREEP</h1>
+      <h1 className='text-[5rem] my-6 text-center text-sky-600'>Twit CREEP</h1>
       
       {/* <div className='text-center text-5xl text-green-400 flex flex-row justify-center gap-x-4'>
         <p className='text-white'>Next update:</p>
