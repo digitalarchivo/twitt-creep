@@ -7,10 +7,11 @@ interface Props {
     account: string;
     description?: string | null;
     tracking: string[]
+    reload:()=>void
 
 }
 
-const Track: React.FC<Props> = ({ username, account, description, tracking }) => {
+const Track: React.FC<Props> = ({ username, account, description, tracking,reload}) => {
     let added = false;
     tracking.forEach(element => {
         // @ts-ignore
@@ -31,7 +32,7 @@ const Track: React.FC<Props> = ({ username, account, description, tracking }) =>
         addTracking(account, username, description ? description : '').then((res) => {
             console.log(res);
             setIsAdded(prev=>true);
-            window.location.reload();
+            reload()
         })
     }
     const onDelete = () => {
@@ -40,7 +41,7 @@ const Track: React.FC<Props> = ({ username, account, description, tracking }) =>
         deleteTracking(account).then((res) => {
             setIsAdded(prev=>false);
             console.log(res);
-            window.location.reload();
+            reload()
         })
     }
     if (!isAdded) {

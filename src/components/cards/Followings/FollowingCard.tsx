@@ -96,7 +96,7 @@ const FollowingCard: React.FC<Props> = ({ name, username, bio, createdAt, follow
                         <Add username={name} reload={reload} state={state}   />
                         <Ignore username={name} reload={reload} state={state} />
                         </div>
-                        <Track username={username} account={name} description={bio} tracking={tracked} />
+                        <Track username={username} reload={reload} account={name} description={bio} tracking={tracked} />
                     </div>
                 </div>
             </div>
