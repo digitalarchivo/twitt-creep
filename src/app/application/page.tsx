@@ -24,8 +24,6 @@ export default async function page({ }: Props) {
   const signIn = await getLastLogIn();
 
   // @ts-ignore
-  console.log('time before date',signIn);
-  // @ts-ignore
   const acct = await getAllFollowings();
   // @ts-ignore
   const lastUpdated = new Date(signIn[0].last_updated).toLocaleDateString();
@@ -36,11 +34,12 @@ export default async function page({ }: Props) {
     <div className='m-2 relative'>
       <TwitImage />
       <h1 className='text-[5rem] my-20 text-center text-sky-600'>Twit CREEP</h1>
-      <div className='text-center text-5xl text-green-400 flex flex-row justify-center gap-x-4'>
+      
+      {/* <div className='text-center text-5xl text-green-400 flex flex-row justify-center gap-x-4'>
         <p className='text-white'>Next update:</p>
-        {/* @ts-ignore */}
         <Countdown targetDate={new Date(signIn[0].last_updated)} />
-      </div>
+      </div> 
+      */}
       <div className='flex flex-col'>
         <h1 className='text-amber-400 text-5xl text-center'>Monitoring</h1>
 

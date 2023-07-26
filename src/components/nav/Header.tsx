@@ -1,5 +1,6 @@
 import React from 'react'
 import ManualTrack from '../Modals/ManualTrack'
+import Refresh from '../buttons/Refresh'
 
 interface Props {
 
@@ -19,6 +20,7 @@ const Header: React.FC<Props> = () => {
                 </div>
     
                 <div className='text-lg lg:text-3xl text-white'>Twitter CREEP Follows</div>
+                <Refresh/>
             </div>
 
         </div>

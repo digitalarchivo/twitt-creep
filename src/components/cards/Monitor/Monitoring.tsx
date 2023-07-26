@@ -28,7 +28,6 @@ const Monitoring: React.FC<Props> = () => {
     })
   
     const refetch = () => {
-        console.log('refetching')
         setIsLoading(true);
         router.refresh();
     }

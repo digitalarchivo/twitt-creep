@@ -64,7 +64,7 @@ const DeleteModal: React.FC<Props> = ({ account,refetch }) => {
     
     return (
         <div>
-            <button onClick={openModal} className='text-white bg-red-500 p-4 rounded-full hover:scale-110'>Stop Monitoring</button>
+            <button onClick={openModal} className='text-white bg-red-500 p-2 rounded-full hover:scale-125'>Stop Monitoring</button>
             <Modal
                 isOpen={modalIsOpen}
                 onAfterOpen={afterOpenModal}
@@ -73,7 +73,7 @@ const DeleteModal: React.FC<Props> = ({ account,refetch }) => {
                 style={customStyles}
                 contentLabel="Remove Collateral Modal"
             >
-                <div className={`border-2 border-purple-800 p-12 flex flex-col text-blue-400 rounded-xl inside-box ${isLoading&& 'shadow-xl shadow-red-700'}`}>
+                <div className={`border-2 border-purple-800 p-4 flex flex-col text-blue-400 rounded-xl inside-box ${isLoading&& 'shadow-xl shadow-red-700'}`}>
                     <div className='text-center my-2'>
                         {isLoading ? (
                             <div className='animate-pulse'>
