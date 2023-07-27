@@ -1,7 +1,7 @@
 'use client'
 import React, { useState, useEffect } from 'react'
 import FollowingCard from './FollowingCard'
-import { getAllFollowings, getLastUpdated, getTracking, massAdoption } from '@/components/utils/supabase'
+import { getAllFollowings, getAllFollowingsForNull, getLastUpdated, getTracking, massAdoption } from '@/components/utils/supabase'
 import { useRouter } from 'next/navigation'
 import Add from '@/components/buttons/Add'
 import Ignore from '@/components/buttons/Ignore'
@@ -30,11 +30,17 @@ const FollowingContainer: React.FC<Props> = ({ accts, listStatus }) => {
     const getData = async () => {
         const res = await getTracking()
         setTracked(res);
-        const res2 = await getAllFollowings();
+        if(listStatus == null){
+            const res2 = await getAllFollowingsForNull();
+            setFollowing(res2);
+        }else{
+            const res2 = await getAllFollowings();
+            setFollowing(res2);
+        }
         const lastUpdated = await getLastUpdated();
         // @ts-ignore
         setUpdated(lastUpdated[0].last_updated);
-        setFollowing(res2);
+        
         setIsLoading(false);
     }
     useEffect(() => {
