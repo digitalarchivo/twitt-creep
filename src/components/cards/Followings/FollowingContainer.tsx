@@ -31,6 +31,7 @@ const FollowingContainer: React.FC<Props> = ({ accts, listStatus }) => {
         const res = await getTracking()
         setTracked(res);
         if(listStatus == null){
+            
             const res2 = await getAllFollowingsForNull();
             setFollowing(res2);
         }else{
