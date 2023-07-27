@@ -12,11 +12,11 @@ const LogIn: React.FC<Props> = ({logIn}) => {
         setLoading(true);
         //sigin db
         //direct to appliaction
-        // await signIn(logIn);
+        await signIn(logIn);
         setTimeout(() => {
             window.location.href = '/application';
             setLoading(false);
-        }, 5000);
+        }, 2000);
     }
 
     return (
