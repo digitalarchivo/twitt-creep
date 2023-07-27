@@ -26,11 +26,32 @@ export const getAllFollowingsSince = async (since: string) => {
         const { data, error } = await supabase
             .from("Followed")
             .select("account,username,created_at,jk_follows,description,followed_by,updated_at")
+            .is('jk_follows', true)
         if (error) {
             throw error;
         }
         return data;
         };
+        export const getAllFollowingsForFalse = async () => {
+            const { data, error } = await supabase
+                .from("Followed")
+                .select("account,username,created_at,jk_follows,description,followed_by,updated_at")
+                .is('jk_follows', false)
+            if (error) {
+                throw error;
+            }
+            return data;
+            };
+        export const getAllFollowingsForNull = async () => {
+            const { data, error } = await supabase
+                .from("Followed")
+                .select("account,username,created_at,jk_follows,description,followed_by,updated_at")
+                .is('jk_follows', null)
+            if (error) {
+                throw error;
+            }
+            return data;
+            };
     export const getAllFollowingsSinceFull = async () => {
         const { data, error } = await supabase
             .from("Followed")
