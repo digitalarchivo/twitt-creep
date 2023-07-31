@@ -112,7 +112,7 @@ const FollowingContainer: React.FC<Props> = ({ accts, listStatus }) => {
 
                         <>
                             <p className='text-sky-500 px-8'> {new Date(updated).toLocaleDateString()}</p>
-                            <span className='text-'>{new Date(updated).toLocaleTimeString()}</span>
+                            <span className='text-'>{new Date(updated).toLocaleTimeString('en-US', { timeZone: 'Europe/London', hour12: true })}</span>
                         </>
                     )
                         : (<></>)}
