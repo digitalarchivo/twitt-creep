@@ -17,6 +17,7 @@ const FollowingContainer: React.FC<Props> = ({ accts, listStatus }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [updated, setUpdated] = useState<any>('');
 
+    const timeOfDate = updated? new Date(updated).getTime():0;
     const router = useRouter();
     const getNum = () => {
         let num = 0;
@@ -112,7 +113,7 @@ const FollowingContainer: React.FC<Props> = ({ accts, listStatus }) => {
 
                         <>
                             <p className='text-sky-500 px-8'> {new Date(updated).toLocaleDateString()}</p>
-                            <span className='text-'>{new Date(updated).toLocaleTimeString('en-US', { timeZone: 'Europe/London', hour12: true })}</span>
+                            <span className='text-'>{new Date(timeOfDate + 4 * 60 * 60 * 1000).toLocaleTimeString()}</span>
                         </>
                     )
                         : (<></>)}
