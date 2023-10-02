@@ -150,14 +150,16 @@ export const deleteTracking = async (id: string) => {
     };
 
 export const getAllProccessed = async()=>{
-    const { data, error } = await supabase
-    .from("Followed")
-    .select('*', { count: 'exact' });
+    const { data, error } = await supabase.rpc('get_total_followed')
+    // .from("Followed")
+    // .select('*', { count: 'exact',head:true });
 
     if (error) {
-        return null;
+        console.log(error)
+        return 0;
     }
     else{
+        console.log('data',data)
         return data;
     }
 }

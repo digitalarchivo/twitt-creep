@@ -6,6 +6,7 @@ import GetDoc from '@/components/buttons/GetDoc';
 import { getAllFollowings, getLastLogIn ,getAllProccessed} from '@/components/utils/supabase';
 import Countdown from '@/components/countdowns/Countdown';
 import TotalAmount from '@/components/cards/Other/TotalAmount';
+import { type } from 'os';
 
 interface Props {
 
@@ -45,6 +46,7 @@ export default async function page({ }: Props) {
       */}
       <div className='flex flex-col'>
         <h1 className='text-amber-400 text-5xl text-center'>Monitoring</h1>
+
         <TotalAmount totalAmount={totalAmount}/>
 
         <Suspense fallback={<p>Loading feed...</p>}>
