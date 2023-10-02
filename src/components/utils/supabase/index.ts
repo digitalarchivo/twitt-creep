@@ -148,4 +148,17 @@ export const deleteTracking = async (id: string) => {
     }
     return data;
     };
+
+export const getAllProccessed = async()=>{
+    const { data, error } = await supabase
+    .from("Followed")
+    .select('*', { count: 'exact' });
+
+    if (error) {
+        return null;
+    }
+    else{
+        return data;
+    }
+}
   

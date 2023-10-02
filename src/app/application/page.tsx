@@ -3,8 +3,9 @@ import Monitoring from '@/components/cards/Monitor/Monitoring';
 import React, { Suspense } from 'react'
 import TwitImage from '@/components/twit/TwitImage';
 import GetDoc from '@/components/buttons/GetDoc';
-import { getAllFollowings, getLastLogIn } from '@/components/utils/supabase';
+import { getAllFollowings, getLastLogIn ,getAllProccessed} from '@/components/utils/supabase';
 import Countdown from '@/components/countdowns/Countdown';
+import TotalAmount from '@/components/cards/Other/TotalAmount';
 
 interface Props {
 
@@ -25,6 +26,8 @@ export default async function page({ }: Props) {
 
   // @ts-ignore
   const acct = await getAllFollowings();
+
+  const totalAmount = await getAllProccessed();
   // @ts-ignore
   const lastUpdated = new Date(signIn[0].last_updated).toLocaleDateString();
 
@@ -42,6 +45,7 @@ export default async function page({ }: Props) {
       */}
       <div className='flex flex-col'>
         <h1 className='text-amber-400 text-5xl text-center'>Monitoring</h1>
+        <TotalAmount totalAmount={totalAmount}/>
 
         <Suspense fallback={<p>Loading feed...</p>}>
 
