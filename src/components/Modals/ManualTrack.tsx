@@ -65,7 +65,7 @@ const ManualTrack: React.FC<Props> = () => {
             data.username = '';
             data.description = '';
             window.location.reload()
-        }, 5000);
+        }, 1000);
     }
     return (
         <div>
@@ -93,22 +93,7 @@ const ManualTrack: React.FC<Props> = () => {
                                         {errors.account && <p className='text-red-500 animate-pulse'>This field is required.</p>}
                                     </div>
 
-                                    {/* Username Field */}
-                                    <div>
-                                        <label className="block text-sm font-medium text-sky-700">
-                                            -------
-                                        </label>
-                                        <input type="text" className="mt-1 focus:ring-slate-800 focus:border-slate-800 block w-full sm:text-sm border-gray-300 rounded-md text-center h-12" />
-                                        {errors.username && <p className='text-red-500 animate-pulse'>This field is optional.</p>}
-                                    </div>
-
-                                    {/* Description Field */}
-                                    <div>
-                                        <label className="block text-sm font-medium text-sky-700">
-                                            ---------
-                                        </label>
-                                        <textarea  className="mt-1 focus:ring-slate-800 focus:border-slate-800 block w-full sm:text-sm border-gray-300 rounded-md h-20 p-2"></textarea>
-                                    </div>
+                                   
                                     <div>
                                         <button className='bg-purple-600 p-3 rounded-2xl mx-8 mt-6 hover:scale-125 text-white'>--------</button>
                                         <button type="submit" className='bg-blue-600 hover:bg-blue-900 border border-transparent  shadow-sm p-3 rounded-2xl mx-8 mt-6 hover:scale-125 text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>-------</button>
@@ -124,26 +109,10 @@ const ManualTrack: React.FC<Props> = () => {
                                         <label className="block text-sm font-medium text-sky-700">
                                             Account
                                         </label>
-                                        <input {...register('account', { required: true })} type="text" required className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md h-12 text-center" />
+                                        <input {...register('account', { required: true })} placeholder="Account(@donaldTrump)" type="text" required className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md h-12 text-center" />
                                         {errors.account && <p className='text-red-500 animate-pulse'>This field is required.</p>}
                                     </div>
 
-                                    {/* Username Field */}
-                                    <div>
-                                        <label className="block text-sm font-medium text-sky-700">
-                                            Username
-                                        </label>
-                                        <input {...register('username', { required: true })} type="text" className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md text-center h-12" />
-                                        {errors.username && <p className='text-red-500 animate-pulse'>This field is optional.</p>}
-                                    </div>
-
-                                    {/* Description Field */}
-                                    <div>
-                                        <label className="block text-sm font-medium text-sky-700">
-                                            Description
-                                        </label>
-                                        <textarea {...register('description')} className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md h-20 p-2"></textarea>
-                                    </div>
                                     <div>
                                         <button onClick={closeModal} className='bg-purple-600 p-3 rounded-2xl mx-8 mt-6 hover:scale-125 text-white'>I&#39;m a pussy Bitch</button>
                                         <button type="submit" className='bg-blue-600 hover:bg-blue-900 border border-transparent  shadow-sm p-3 rounded-2xl mx-8 mt-6 hover:scale-125 text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>Add Account</button>
