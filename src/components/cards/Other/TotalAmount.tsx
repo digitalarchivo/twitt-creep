@@ -1,14 +1,15 @@
 'use client'
 import { getAllProccessed } from "@/components/utils/supabase";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 // @ts-ignore
 const TotalAmount = (amountProccessed ) => {
-  const [procc,setProcc] = useState<any>(amountProccessed.totalAmount.toLocaleString('en-US'));
+  const [procc,setProcc] = useState<any>(amountProccessed);
   const [isLoading,setIsLoading]= useState(true);
     const getData = async () => {
         const res = await getAllProccessed();
-        setProcc(res.totalAmount.toLocaleString('en-US'));
+        const resss = Number(res).toLocaleString('en-US');
+        setProcc(resss);
         setIsLoading(false);
     }
     useEffect(() => {
