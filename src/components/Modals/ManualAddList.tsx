@@ -70,7 +70,7 @@ const ManualAddList: React.FC<Props> = () => {
     }
     return (
         <div>
-            <button onClick={openModal} className='bg-sky-500 text-white rounded-3xl hover:scale-125 p-5'>Manual Add To List</button>
+            <button onClick={openModal} className='bg-sky-500 text-white rounded-3xl hover:scale-125 p-5'>Add To Project Watch List</button>
             <Modal
                 isOpen={modalIsOpen}
                 onAfterOpen={afterOpenModal}

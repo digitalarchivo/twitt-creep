@@ -69,7 +69,7 @@ const ManualTrack: React.FC<Props> = () => {
     }
     return (
         <div>
-            <button onClick={openModal} className='bg-purple-600 text-amber-400 rounded-3xl hover:scale-125 p-5'>Manual Track</button>
+            <button onClick={openModal} className='bg-purple-600 text-amber-400 rounded-3xl hover:scale-125 p-5'>Track  Twitter Acc</button>
             <Modal
                 isOpen={modalIsOpen}
                 onAfterOpen={afterOpenModal}
