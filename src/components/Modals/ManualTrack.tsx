@@ -111,7 +111,7 @@ const ManualTrack: React.FC<Props> = () => {
                                         </label>
                                         <input {...register('account', { required: true })} placeholder="Account(@donaldTrump)" type="text" required className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md h-12 text-center" />
                                         {errors.account && <p className='text-red-500 animate-pulse'>This field is required.</p>}
-                                        <p className='text-xs text-red-500 animate-pulse'>Please only the account aka with the @</p>
+                                        <p className='text-xs text-red-500 animate-pulse mt-2'>Please only the account aka with the <span className='text-sm'>@</span></p>
                                     </div>
 
                                     <div>
