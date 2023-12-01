@@ -48,7 +48,7 @@ const ManualAddList: React.FC<Props> = () => {
         setIsOpen(false);
 
     }
-    const { register, handleSubmit, formState: { errors },reset } = useForm<FormData>();
+    const { register, handleSubmit, formState: { errors }, reset } = useForm<FormData>();
 
     const router = useRouter();
     const onSubmit = (data: FormData) => {
@@ -90,7 +90,7 @@ const ManualAddList: React.FC<Props> = () => {
                                         <label className="block text-sm font-medium text-sky-700">
                                             --------
                                         </label>
-                                        <input {...register('account', { required: true })} type="text"  required className="mt-1 focus:ring-slate-500 focus:border-slate-500 block w-full sm:text-sm border-gray-700 rounded-md h-12 text-center" />
+                                        <input {...register('account', { required: true })} type="text" required className="mt-1 focus:ring-slate-500 focus:border-slate-500 block w-full sm:text-sm border-gray-700 rounded-md h-12 text-center" />
                                         {errors.account && <p className='text-red-500 animate-pulse'>This field is required.</p>}
                                     </div>
 
@@ -112,7 +112,10 @@ const ManualAddList: React.FC<Props> = () => {
                                         <input {...register('account', { required: true })} placeholder='Account(@donaldTrump)' type="text" required className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md h-12 text-center" />
                                         {errors.account && <p className='text-red-500 animate-pulse'>This field is required.</p>}
                                     </div>
-
+                                    <div>
+                                        <button onClick={closeModal} className='bg-purple-600 p-3 rounded-2xl mx-8 mt-6 hover:scale-125 text-white'>Cancel</button>
+                                        <button type="submit" className='bg-blue-600 hover:bg-blue-900 border border-transparent  shadow-sm p-3 rounded-2xl mx-8 mt-6 hover:scale-125 text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>Add to Watch List</button>
+                                    </div>
                                 </form>
                             </>
                         )}
