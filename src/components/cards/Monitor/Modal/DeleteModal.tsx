@@ -84,8 +84,8 @@ const DeleteModal: React.FC<Props> = ({ account,refetch }) => {
                         ) : (
                             <>
                                 <p className='text-xl'>Are you sure you want to stop monitoring?</p>
-                                <button onClick={closeModal} className='bg-purple-600 p-3 rounded-2xl mx-8 mt-6 hover:scale-125 text-white'>I&#39;m a pussy Bitch</button>
-                                <button onClick={handleDelete} className='bg-red-600 p-3 rounded-2xl mx-8 mt-6 hover:scale-125 text-white'>I am a man that knows what he is doing Delete the Damn thing</button>
+                                <button onClick={closeModal} className='bg-red-600 p-3 rounded-2xl mx-8 mt-6 hover:scale-125 text-white'>Cancel</button>
+                                <button onClick={handleDelete} className='bg-green-600 p-3 rounded-2xl mx-8 mt-6 hover:scale-125 text-white'>Confirm</button>
                             </>
                         )}
                     </div>
