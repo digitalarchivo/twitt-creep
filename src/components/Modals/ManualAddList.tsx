@@ -54,7 +54,7 @@ const ManualAddList: React.FC<Props> = () => {
     const onSubmit = (data: FormData) => {
         console.log(data);
         setIsLoading(prev => true);
-        addFollowing(data.account, 'a', 'a').then((res) => {
+        addFollowing(data.account, data.account.replace("@",""), "Manually Added").then((res) => {
             console.log(res);
             window.location.reload()
         })
