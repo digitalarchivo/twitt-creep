@@ -116,7 +116,7 @@ const ManualTrack: React.FC<Props> = () => {
 
                                     <div>
                                         <button onClick={closeModal} className='bg-red-600 p-3 rounded-2xl mx-8 mt-6 hover:scale-125 text-white'>Cancel</button>
-                                        <button type="submit" className='bg-blue-600 hover:bg-blue-900 border border-transparent  shadow-sm p-3 rounded-2xl mx-8 mt-6 hover:scale-125 text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>Add Account</button>
+                                        <button type="submit" className='bg-blue-600 hover:bg-blue-900 border border-transparent  shadow-sm p-3 rounded-2xl mx-8 mt-6 hover:scale-125 text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>Add Account to Track</button>
                                     </div>
                                 </form>
                             </>
