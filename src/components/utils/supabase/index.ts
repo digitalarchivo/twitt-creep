@@ -103,7 +103,16 @@ export const deleteTracking = async (id: string) => {
         export const addFollowing = async (account:string,username:any,description:string)=>{
             const { data, error } = await supabase
             .from("Followed")
-            .insert ([{account:account,username:username, description:description, jk_follows:true, created_at:new Date() }])
+            .upsert(
+                [{ 
+                    account: account, 
+                    username: username, 
+                    description: description, 
+                    jk_follows: true, 
+                    created_at: new Date() 
+                }],
+                { onConflict: "account" } // Assuming 'account' is the unique/primary key
+            );
         }
         export const getLastUpdated = async () => {
             const { data, error } = await supabase
