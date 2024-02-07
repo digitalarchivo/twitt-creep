@@ -124,7 +124,6 @@ const FollowingContainer: React.FC<Props> = ({ accts, listStatus }) => {
                 {window.location.href.endsWith('application') && (
                     <div className='flex flex-row justify-between'>
                         <button onClick={ignoreAll} className='p-8 bg-red-500 rounded-full text-white text-5xl m-4 hover:scale-150 border-4 border-white'>Ignore All</button>
-                        <button onClick={addAll} className='p-8 bg-green-500 rounded-full text-white text-5xl m-4 hover:scale-150 border-4 border-white'>Add All</button>
                     </div>
                 )}
                 {following.map((item: { jk_follows: string | boolean | null; account: string; username: string; description: string | null; created_at: string; followed_by: string[] }, index: any) => (
