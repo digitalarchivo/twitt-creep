@@ -19,13 +19,16 @@ const FollowingContainer: React.FC<Props> = ({ accts, listStatus }) => {
 
     const timeOfDate = updated? new Date(updated).getTime():0;
     const router = useRouter();
-    const [unfollowedCount, setUnfollowedCount] = useState<number|null>(0);
-
-   const getNum = async () => {
-        const res = await getTotalUnfollowed();
-        // setUnfollowedCount(res);
-        return res;
-   }
+ 
+    const getNum = () => {
+        let num = 0;
+        following.forEach((item: { jk_follows: boolean | null }) => {
+            if (item.jk_follows == listStatus) {
+                num++;
+            }
+        })
+        return num;
+    }
     const getData = async () => {
         const res = await getTracking()
         setTracked(res);
