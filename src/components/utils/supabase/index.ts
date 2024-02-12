@@ -184,7 +184,6 @@ export const getTotalUnfollowed = async () => {
         console.error("Error fetching total unfollowed count:", error);
         return 0;
     } else {
-        console.log("Total unfollowed count:", count);
         return count;
     }
 }

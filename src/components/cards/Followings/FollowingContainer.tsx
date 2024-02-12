@@ -1,9 +1,10 @@
 'use client'
 import React, { useState, useEffect } from 'react'
 import FollowingCard from './FollowingCard'
-import { getAllFollowings, getAllFollowingsForFalse, getAllFollowingsForNull, getLastUpdated, getTracking, massAdoption,getTotalUnfollowed } from '@/components/utils/supabase'
+import { getAllFollowings, getAllFollowingsForFalse, getAllFollowingsForNull, getLastUpdated, getTracking, massAdoption } from '@/components/utils/supabase'
 import { useRouter } from 'next/navigation'
 import Add from '@/components/buttons/Add'
+import ListLength from './ListLength'
 import Ignore from '@/components/buttons/Ignore'
 
 interface Props {
@@ -20,21 +21,7 @@ const FollowingContainer: React.FC<Props> = ({ accts, listStatus }) => {
     const timeOfDate = updated? new Date(updated).getTime():0;
     const router = useRouter();
  
-    const getNum = async () => {
-        let num = 0;
-        if (listStatus == null) {
-            const res = await getTotalUnfollowed();
-            return res;
-        }else{
-            following.forEach((item: { jk_follows: boolean | null }) => {
-                if (item.jk_follows == listStatus) {
-                    num++;
-                }
-            })
-            return num;
-        }
 
-    }
 
     const getData = async () => {
         const res = await getTracking()
@@ -113,20 +100,7 @@ const FollowingContainer: React.FC<Props> = ({ accts, listStatus }) => {
     }
     return (
         <>
-            <div className='flex flex-row justify-between'>
-                <h1 className='text-center  text-amber-400 text-5xl  my-2'>List Length: {getNum()}</h1>
-                <h1 className=' text-right text-2xl mt-8 text-white flex flex-row'>
-                    <p>Last Updated: </p>
-                    {updated ? (
-
-                        <>
-                            <p className='text-sky-500 px-8'> {new Date(updated).toLocaleDateString()}</p>
-                            <span className='text-'>{new Date(timeOfDate + 4 * 60 * 60 * 1000).toLocaleTimeString()}</span>
-                        </>
-                    )
-                        : (<></>)}
-                </h1>
-            </div>
+           <ListLength loading={isLoading} following={following} updated={updated} listStatus={listStatus} />
             <hr />
             <div className=' '>
                 {window.location.href.endsWith('application') && (
