@@ -1,7 +1,7 @@
 'use client'
 import React, { useState, useEffect } from 'react'
 import FollowingCard from './FollowingCard'
-import { getAllFollowings, getAllFollowingsForFalse, getAllFollowingsForNull, getLastUpdated, getTracking, massAdoption } from '@/components/utils/supabase'
+import { getAllFollowings, getAllFollowingsForFalse, getAllFollowingsForNull, getLastUpdated, getTracking, massAdoption,getTotalUnfollowed } from '@/components/utils/supabase'
 import { useRouter } from 'next/navigation'
 import Add from '@/components/buttons/Add'
 import Ignore from '@/components/buttons/Ignore'
@@ -19,15 +19,13 @@ const FollowingContainer: React.FC<Props> = ({ accts, listStatus }) => {
 
     const timeOfDate = updated? new Date(updated).getTime():0;
     const router = useRouter();
-    const getNum = () => {
-        let num = 0;
-        following.forEach((item: { jk_follows: boolean | null }) => {
-            if (item.jk_follows == listStatus) {
-                num++;
-            }
-        })
-        return num;
-    }
+    const [unfollowedCount, setUnfollowedCount] = useState<number|null>(0);
+
+   const getNum = async () => {
+        const res = await getTotalUnfollowed();
+        // setUnfollowedCount(res);
+        return res;
+   }
     const getData = async () => {
         const res = await getTracking()
         setTracked(res);
@@ -122,7 +120,7 @@ const FollowingContainer: React.FC<Props> = ({ accts, listStatus }) => {
             <hr />
             <div className=' '>
                 {window.location.href.endsWith('application') && (
-                    <div className='flex flex-row justify-between'>
+                    <div className='flex flex-row justify-center'>
                         <button onClick={ignoreAll} className='p-8 bg-red-500 rounded-full text-white text-5xl m-4 hover:scale-150 border-4 border-white'>Ignore All</button>
                     </div>
                 )}

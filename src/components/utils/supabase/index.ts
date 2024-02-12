@@ -173,3 +173,18 @@ export const getAllProccessed = async()=>{
     }
 }
   
+
+export const getTotalUnfollowed = async () => {
+    const { data, error, count } = await supabase
+        .from("Followed")
+        .select('*', { count: 'exact' })
+        .is('jk_follows', null);
+
+    if (error) {
+        console.error("Error fetching total unfollowed count:", error);
+        return 0;
+    } else {
+        console.log("Total unfollowed count:", count);
+        return count;
+    }
+}
