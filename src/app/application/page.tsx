@@ -1,68 +1,63 @@
-import FollowingContainer from '@/components/cards/Followings/FollowingContainer';
-import Monitoring from '@/components/cards/Monitor/Monitoring';
-import React, { Suspense } from 'react'
-import TwitImage from '@/components/twit/TwitImage';
-import GetDoc from '@/components/buttons/GetDoc';
-import { getAllFollowings, getLastLogIn ,getAllProccessed} from '@/components/utils/supabase';
-import Countdown from '@/components/countdowns/Countdown';
-import TotalAmount from '@/components/cards/Other/TotalAmount';
-import { type } from 'os';
+// src/app/page.tsx
 
-interface Props {
+'use client'; // Mark the page as a client component
 
-}
+import dynamic from 'next/dynamic';
+import { getLastLogIn } from '@/components/utils/supabase';
+import React, { useEffect, useState } from 'react';
 
-type signIn = {
+const LogIn = dynamic(() => import('@/components/buttons/LogIn')); // Dynamically import LogIn component
 
-  id: number,
-  last_logged_in: string,
-  new_amount: null | number,
-  last_updated: string,
-  time_before: string
-}
+interface Props {}
 
-export default async function page({ }: Props) {
+interface SignIn extends Array<{
+  id: number;
+  last_logged_in: string;
+  new_amount: number | null;
+  last_updated: string;
+  time_before: string;
+}> {}
 
-  const signIn = await getLastLogIn();
+export default function Page({ signIn, acct, totalAmount }: { signIn: SignIn; acct: any[], totalAmount: any[]}) {
+  const [currentUserData, setCurrentUserData] = useState<any>(null);
 
-  // @ts-ignore
-  const acct = await getAllFollowings();
+  useEffect(() => {
+    setCurrentUserData(signIn ? signIn[0]: null)
+  }, []);
 
-  const totalAmount = await getAllProccessed();
-  // @ts-ignore
-  const lastUpdated = new Date(signIn[0].last_updated).toLocaleDateString();
+  const lastUpdated = new Date(currentUserData?.last_updated || '').toLocaleDateString();
+  const lastCheckedIn = new Date(currentUserData?.time_before || '').toLocaleDateString();
 
-  // @ts-ignore
-  const lastCheckedIn = new Date(signIn[0].time_before).toLocaleDateString();
   return (
-    <div className='m-2 relative'>
+    <Layout>
       <TwitImage />
-      <h1 className='text-[5rem] my-6 text-center text-sky-600'>Twit CREEP</h1>
-      
-      {/* <div className='text-center text-5xl text-green-400 flex flex-row justify-center gap-x-4'>
-        <p className='text-white'>Next update:</p>
-        <Countdown targetDate={new Date(signIn[0].last_updated)} />
-      </div> 
-      */}
-      <div className='flex flex-col'>
-        <h1 className='text-amber-400 text-5xl text-center'>Monitoring</h1>
+      <h1 className="text-[5rem] my-6 text-center text-sky-600">Twit CREEP</h1>
+      {/* Add your components here */}
+      {!currentUserData && <p>Please login.</p>}
+      {currentUserData && (
+        <>
+          <p>{currentUserData.id}</p>
+          <p>{currentUserData.last_logged_in}</p>
+          <p>{currentUserData.new_amount}</p>
+          <p>{currentUserData.last_updated}</p>
+          <p>{currentUserData.time_before}</p>
+          <LogIn />
+        </>
+      )}
+    </Layout>
+  );
+}
 
-        <TotalAmount totalAmount={totalAmount}/>
+export async function getServerSideProps() {
+  const signIn = await getLastLogIn();
+  const acct = await getAllFollowings();
+  const totalAmount = await getAllProcessed();
 
-        <Suspense fallback={<p>Loading feed...</p>}>
-
-          <Monitoring />
-        </Suspense>
-        <div className='flex flex-row justify-between'>
-
-        </div>
-      
-          {/* <GetDoc /> */}
-          {acct && (
-            // @ts-ignore
-            <FollowingContainer accts={acct} listStatus={null} />
-          )}
-      </div>
-    </div>
-  )
+  return {
+    props: {
+      signIn,
+      acct,
+      totalAmount,
+    },
+  };
 }
